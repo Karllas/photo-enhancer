@@ -19,7 +19,7 @@ if BACKGROUND_ENHANCEMENT is None:
 else:
     BACKGROUND_ENHANCEMENT = True if BACKGROUND_ENHANCEMENT == 'True' else False
 
-enhancer = Enhancer(method=ENHANCE_METHOD, background_enhancement=BACKGROUND_ENHANCEMENT, upscale=0)
+enhancer = Enhancer(method=ENHANCE_METHOD, background_enhancement=BACKGROUND_ENHANCEMENT, upscale=1)
 
 
 async def enhance(enhanceBase: _schemas._EnhanceBase) -> Image:
