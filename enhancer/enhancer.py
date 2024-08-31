@@ -9,7 +9,7 @@ class Enhancer:
     def __init__(self, method='gfpgan', background_enhancement=True, upscale=2):
         # Set up RealESRGAN for background enhancement
         if background_enhancement:
-            if upscale == 2:
+            if upscale == 2 or upscale == 1:
                 if not torch.cuda.is_available(): # CPU
                     import warnings
                     warnings.warn('The unoptimized RealESRGAN is slow on CPU. We do not use it. '
@@ -18,9 +18,9 @@ class Enhancer:
                 else:
                     from basicsr.archs.rrdbnet_arch import RRDBNet
                     from realesrgan import RealESRGANer
-                    model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=2)
+                    model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=upscale)
                     self.bg_upsampler = RealESRGANer(
-                        scale=2,
+                        scale=upscale,
                         model_path='https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth',
                         model=model,
                         tile=400,
